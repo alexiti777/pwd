@@ -51,7 +51,13 @@ app.get("/showpasswords", (req, res) => {
 app.post("/decryptpassword", (req, res) => {
   res.send(decrypt(req.body));
 });
-
+app.delete("/delpas", (req, res) => {
+  const { id } =  req.body;
+  db.query('DELETE FROM passwords WHERE id = ?', [req.body.id] , (err, 
+  result) => {
+    res.redirect('/');
+    });
+  });
 app.listen(PORT, () => {
   console.log("Server is running");
 });
